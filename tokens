@@ -1,0 +1,67 @@
+.IPPCODE19
+.ippcode19    
+.IPPcode19
+.IPPCODE19 
+CREATEFRAME     PUSHFRAME  
+POPFRAME   RETURN     
+BREAK      DEFVAR     
+POPS       
+CALL       LABEL      
+JUMP    PUSHS      WRITE      
+EXIT       DBPRINT    
+MOVE            INT2CHAR   
+STRLEN  TYPE       NOT        READ       ADD        
+SUB        
+MUL        
+IDIV       
+LT         
+GT         
+EQ         
+AND        
+OR         
+STRI2INT   
+CONCAT     
+GETCHAR    
+SETCHAR    
+
+
+
+JUMPIFEQ   
+JUMPIFNEQ  
+# comment comment comment comment akwe
+_variable   -variable $variable
+&variable %variable *variable !variable ?variable
+
+LF@_variable   GF@-variable TF@$variable
+LF@&variable GF@%variable TF@*variable LF@!variable GF@?variable
+
+createframe     pushframe  
+popframe   return     
+break      defvar     
+pops       
+call       label      
+jump    pushs      write      
+exit       dbprint    
+move            int2char   
+strlen  type       not        read       add        
+sub        
+mul        
+idiv       
+lt         
+gt         
+eq         
+and        
+or         
+stri2int   
+concat     
+getchar    
+setchar    
+jumpifeq   
+jumpifneq  
+
+
+int@21684 int@-1354
+bool@true bool@false
+string@laiwejljnwekjuagebjawgehvmb
+nil@nil
+string@

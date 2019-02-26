@@ -1,0 +1,5 @@
+.ippcode19
+
+DEFVAR GF@var
+MOVE GF@var string@jozo
+WRITE GF@var

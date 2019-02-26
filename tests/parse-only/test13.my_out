@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<program language="IPPcode19">
+  <instruction order="1" opcode="DEFVAR">
+    <arg1 type="var">GF@var</arg1>
+  </instruction>
+  <instruction order="2" opcode="MOVE">
+    <arg1 type="var">GF@var</arg1>
+    <arg2 type="string">reeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</arg2>
+  </instruction>
+  <instruction order="3" opcode="WRITE">
+    <arg1 type="var">GF@var</arg1>
+  </instruction>
+  <instruction order="4" opcode="WRITE">
+    <arg1 type="string">\010</arg1>
+  </instruction>
+  <instruction order="5" opcode="SETCHAR">
+    <arg1 type="var">GF@var</arg1>
+    <arg2 type="int">8</arg2>
+    <arg3 type="string">O____________O</arg3>
+  </instruction>
+  <instruction order="6" opcode="WRITE">
+    <arg1 type="var">GF@var</arg1>
+  </instruction>
+</program>

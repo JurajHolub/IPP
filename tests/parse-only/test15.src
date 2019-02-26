@@ -1,0 +1,22 @@
+.IPPcode19
+
+LABEL jozko
+WRITE string@jozko
+JUMP ignac
+
+LABEL ferko
+WRITE string@ferko
+JUMP matko
+
+write string@mrtvy_kod
+
+LABEL matko
+WRITE string@matko
+JUMP __end__
+
+LABEL ignac
+WRITE string@ignac
+JUMP ferko
+
+LABEL __end__
+write string@endBRO

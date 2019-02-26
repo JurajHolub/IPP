@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<program language="IPPcode19">
+  <instruction order="0" opcode="DEFVAR">
+    <arg1 type="var">DEFVAR</arg1>
+  </instruction>
+  <instruction order="1" opcode="WRITE">
+    <arg1 type="var">TF@x</arg1>
+  </instruction>
+</program>

@@ -1,0 +1,5 @@
+.IPPcode19
+defvar GF@unterwaserman
+getchar GF@unterwaserman string@abcdefghijklmnopqrstu int@10
+WRITE GF@unterwaserman
+

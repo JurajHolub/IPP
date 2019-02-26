@@ -1,0 +1,45 @@
+.IPPcode19
+CREATEFRAME
+PUSHFRAME
+
+###############################################################################
+#                            BEGIN LIB FUN LENGTH
+###############################################################################
+JUMP $length$def
+LABEL length
+CREATEFRAME
+PUSHFRAME
+DEFVAR LF@type
+DEFVAR LF@s
+DEFVAR LF@$length$ret
+POPS LF@s
+TYPE LF@type LF@s
+JUMPIFEQ $noerror LF@type string@string
+EXIT int@4
+LABEL $noerror
+STRLEN LF@$length$ret LF@s
+PUSHS LF@$length$ret
+POPFRAME
+RETURN
+LABEL $length$def
+###############################################################################
+#                            END LIB FUN LENGTH
+###############################################################################
+
+DEFVAR LF@$tmp_0000000000
+DEFVAR LF@len
+
+PUSHS string@dlooooooooooooooooooooooooooooooooooooooooooohaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+DEFVAR LF@long_string
+POPS LF@long_string
+TYPE LF@$tmp_0000000000 LF@long_string
+JUMPIFNEQ $tmp_0000000001 string@bool LF@$tmp_0000000000
+EXIT int@4
+LABEL $tmp_0000000001
+PUSHS LF@long_string
+CALL length
+POPS LF@len
+WRITE LF@long_string
+WRITE LF@len
+
+POPFRAME

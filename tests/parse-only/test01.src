@@ -1,0 +1,23 @@
+#coment at beéíqľšunôfq
+
+.IPPcode19#awiejw§em aôwej awôoejk
+CREATEFRAME
+PUSHFRAME
+DEFVAR LF@var1
+DEFVAR     LF@var2
+DEFVAR          LF@var3
+
+defvar LF@var4
+
+MOVE LF@var1 string@reťezec\032s\032lomítkem\032\092\032a\010novým\035rádkem
+move LF@var2 bool@false
+move LF@var3 int@-123456
+move LF@var4 nil@nil
+
+WRITE LF@var1
+WRITE LF@var2
+WRITE LF@var3
+WRITE LF@var4
+WRITE string@reťezec\032s\032lomítkem\032\092\032a\010novým\035rádkem#comentar_za_stringom
+
+POPFRAME

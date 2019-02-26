@@ -1,0 +1,21 @@
+
+.IPPcode19#awiejw§em aôwej awôoejk
+CREATEFRAME
+PUSHFRAME
+
+DEFVAR GF@var1
+DEFVAR GF@var2
+DEFVAR GF@var3
+MOVE GF@var1 int@56
+MOVE GF@var2 int@-13
+
+ADD GF@var3 GF@var1 GF@var2
+WRITE GF@var3
+SUB GF@var3 GF@var1 GF@var2
+WRITE GF@var3
+MUL GF@var3 GF@var1 GF@var2
+WRITE GF@var3
+IDIV GF@var3 GF@var1 GF@var2
+WRITE GF@var3
+
+POPFRAME

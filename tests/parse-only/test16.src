@@ -1,0 +1,17 @@
+.IPPcode19
+write string@aaaa
+
+jumpifneq _____1 string@adam string@eva
+LABEL _____2
+write string@bbbb
+JUMP _____3
+write string@cccccc
+
+LABEL _____1
+write string@ddddd
+jumpifeq _____2 nil@nil nil@nil
+
+LABEL _____3
+LABEL _____4
+
+write string@eeeeeeee

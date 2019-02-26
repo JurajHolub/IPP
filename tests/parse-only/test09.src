@@ -1,0 +1,10 @@
+.IPPcode19
+DEFVAR GF@ema_je_v_sadre_a_nevi_sa_hnut
+DEFVAR GF@var2
+DEFVAR GF@var3
+MOVE GF@var2 string@lebyalkwenôknalwejôlamôdoôawmaôwken-lmv
+MOVE GF@var3 int@5
+STRI2INT GF@ema_je_v_sadre_a_nevi_sa_hnut string@jozko_papa_ferko_spieva_matko_spi int@10
+write GF@ema_je_v_sadre_a_nevi_sa_hnut
+STRI2INT GF@ema_je_v_sadre_a_nevi_sa_hnut GF@var2 GF@var3
+write GF@ema_je_v_sadre_a_nevi_sa_hnut

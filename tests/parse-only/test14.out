@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<program language="IPPcode19">
+  <instruction order="1" opcode="CREATEFRAME"/>
+  <instruction order="2" opcode="PUSHFRAME"/>
+  <instruction order="3" opcode="DEFVAR">
+    <arg1 type="var">LF@_bool</arg1>
+  </instruction>
+  <instruction order="4" opcode="DEFVAR">
+    <arg1 type="var">LF@_string</arg1>
+  </instruction>
+  <instruction order="5" opcode="DEFVAR">
+    <arg1 type="var">LF@_int</arg1>
+  </instruction>
+  <instruction order="6" opcode="DEFVAR">
+    <arg1 type="var">LF@_nil</arg1>
+  </instruction>
+  <instruction order="7" opcode="DEFVAR">
+    <arg1 type="var">LF@uninit</arg1>
+  </instruction>
+  <instruction order="8" opcode="MOVE">
+    <arg1 type="var">LF@_bool</arg1>
+    <arg2 type="bool">true</arg2>
+  </instruction>
+  <instruction order="9" opcode="MOVE">
+    <arg1 type="var">LF@_string</arg1>
+    <arg2 type="string">gitara</arg2>
+  </instruction>
+  <instruction order="10" opcode="MOVE">
+    <arg1 type="var">LF@_int</arg1>
+    <arg2 type="int">0</arg2>
+  </instruction>
+  <instruction order="11" opcode="MOVE">
+    <arg1 type="var">LF@_nil</arg1>
+    <arg2 type="nil">nil</arg2>
+  </instruction>
+  <instruction order="12" opcode="DEFVAR">
+    <arg1 type="var">LF@res</arg1>
+  </instruction>
+  <instruction order="13" opcode="TYPE">
+    <arg1 type="var">LF@res</arg1>
+    <arg2 type="var">LF@_bool</arg2>
+  </instruction>
+  <instruction order="14" opcode="WRITE">
+    <arg1 type="var">LF@res</arg1>
+  </instruction>
+  <instruction order="15" opcode="WRITE">
+    <arg1 type="string">\010</arg1>
+  </instruction>
+  <instruction order="16" opcode="TYPE">
+    <arg1 type="var">LF@res</arg1>
+    <arg2 type="var">LF@_string</arg2>
+  </instruction>
+  <instruction order="17" opcode="WRITE">
+    <arg1 type="var">LF@res</arg1>
+  </instruction>
+  <instruction order="18" opcode="WRITE">
+    <arg1 type="string">\010</arg1>
+  </instruction>
+  <instruction order="19" opcode="TYPE">
+    <arg1 type="var">LF@res</arg1>
+    <arg2 type="var">LF@_int</arg2>
+  </instruction>
+  <instruction order="20" opcode="WRITE">
+    <arg1 type="var">LF@res</arg1>
+  </instruction>
+  <instruction order="21" opcode="WRITE">
+    <arg1 type="string">\010</arg1>
+  </instruction>
+  <instruction order="22" opcode="TYPE">
+    <arg1 type="var">LF@res</arg1>
+    <arg2 type="var">LF@_nil</arg2>
+  </instruction>
+  <instruction order="23" opcode="WRITE">
+    <arg1 type="var">LF@res</arg1>
+  </instruction>
+  <instruction order="24" opcode="WRITE">
+    <arg1 type="string">\010</arg1>
+  </instruction>
+  <instruction order="25" opcode="TYPE">
+    <arg1 type="var">LF@res</arg1>
+    <arg2 type="var">LF@_uninit</arg2>
+  </instruction>
+  <instruction order="26" opcode="WRITE">
+    <arg1 type="var">LF@res</arg1>
+  </instruction>
+  <instruction order="27" opcode="WRITE">
+    <arg1 type="string">\010</arg1>
+  </instruction>
+  <instruction order="28" opcode="POPFRAME"/>
+</program>
+

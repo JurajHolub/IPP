@@ -1,0 +1,39 @@
+.IPPcode19
+
+CREATEFRAME
+PUSHFRAME
+
+DEFVAR LF@_bool
+DEFVAR LF@_string
+DEFVAR LF@_int
+DEFVAR LF@_nil
+DEFVAR LF@uninit
+
+MOVE LF@_bool bool@true
+MOVE LF@_string string@gitara
+MOVE LF@_int int@0
+MOVE LF@_nil nil@nil
+
+DEFVAR LF@res
+
+TYPE LF@res LF@_bool
+write LF@res
+write string@\010
+
+TYPE LF@res LF@_string
+write LF@res
+write string@\010
+
+TYPE LF@res LF@_int
+write LF@res
+write string@\010
+
+TYPE LF@res LF@_nil
+write LF@res
+write string@\010
+
+TYPE LF@res LF@_uninit
+write LF@res
+write string@\010
+
+POPFRAME

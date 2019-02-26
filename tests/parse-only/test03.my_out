@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<program language="IPPcode19">
+  <instruction order="1" opcode="CREATEFRAME"/>
+  <instruction order="2" opcode="PUSHFRAME"/>
+  <instruction order="3" opcode="JUMP">
+    <arg1 type="label">$length$def</arg1>
+  </instruction>
+  <instruction order="4" opcode="LABEL">
+    <arg1 type="label">length</arg1>
+  </instruction>
+  <instruction order="5" opcode="CREATEFRAME"/>
+  <instruction order="6" opcode="PUSHFRAME"/>
+  <instruction order="7" opcode="DEFVAR">
+    <arg1 type="var">LF@type</arg1>
+  </instruction>
+  <instruction order="8" opcode="DEFVAR">
+    <arg1 type="var">LF@s</arg1>
+  </instruction>
+  <instruction order="9" opcode="DEFVAR">
+    <arg1 type="var">LF@$length$ret</arg1>
+  </instruction>
+  <instruction order="10" opcode="POPS">
+    <arg1 type="var">LF@s</arg1>
+  </instruction>
+  <instruction order="11" opcode="TYPE">
+    <arg1 type="var">LF@type</arg1>
+    <arg2 type="var">LF@s</arg2>
+  </instruction>
+  <instruction order="12" opcode="JUMPIFEQ">
+    <arg1 type="label">$noerror</arg1>
+    <arg2 type="var">LF@type</arg2>
+    <arg3 type="string">string</arg3>
+  </instruction>
+  <instruction order="13" opcode="EXIT">
+    <arg1 type="int">4</arg1>
+  </instruction>
+  <instruction order="14" opcode="LABEL">
+    <arg1 type="label">$noerror</arg1>
+  </instruction>
+  <instruction order="15" opcode="STRLEN">
+    <arg1 type="var">LF@$length$ret</arg1>
+    <arg2 type="var">LF@s</arg2>
+  </instruction>
+  <instruction order="16" opcode="PUSHS">
+    <arg1 type="var">LF@$length$ret</arg1>
+  </instruction>
+  <instruction order="17" opcode="POPFRAME"/>
+  <instruction order="18" opcode="RETURN"/>
+  <instruction order="19" opcode="LABEL">
+    <arg1 type="label">$length$def</arg1>
+  </instruction>
+  <instruction order="20" opcode="DEFVAR">
+    <arg1 type="var">LF@$tmp_0000000000</arg1>
+  </instruction>
+  <instruction order="21" opcode="DEFVAR">
+    <arg1 type="var">LF@len</arg1>
+  </instruction>
+  <instruction order="22" opcode="PUSHS">
+    <arg1 type="string">dlooooooooooooooooooooooooooooooooooooooooooohaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</arg1>
+  </instruction>
+  <instruction order="23" opcode="DEFVAR">
+    <arg1 type="var">LF@long_string</arg1>
+  </instruction>
+  <instruction order="24" opcode="POPS">
+    <arg1 type="var">LF@long_string</arg1>
+  </instruction>
+  <instruction order="25" opcode="TYPE">
+    <arg1 type="var">LF@$tmp_0000000000</arg1>
+    <arg2 type="var">LF@long_string</arg2>
+  </instruction>
+  <instruction order="26" opcode="JUMPIFNEQ">
+    <arg1 type="label">$tmp_0000000001</arg1>
+    <arg2 type="string">bool</arg2>
+    <arg3 type="var">LF@$tmp_0000000000</arg3>
+  </instruction>
+  <instruction order="27" opcode="EXIT">
+    <arg1 type="int">4</arg1>
+  </instruction>
+  <instruction order="28" opcode="LABEL">
+    <arg1 type="label">$tmp_0000000001</arg1>
+  </instruction>
+  <instruction order="29" opcode="PUSHS">
+    <arg1 type="var">LF@long_string</arg1>
+  </instruction>
+  <instruction order="30" opcode="CALL">
+    <arg1 type="label">length</arg1>
+  </instruction>
+  <instruction order="31" opcode="POPS">
+    <arg1 type="var">LF@len</arg1>
+  </instruction>
+  <instruction order="32" opcode="WRITE">
+    <arg1 type="var">LF@long_string</arg1>
+  </instruction>
+  <instruction order="33" opcode="WRITE">
+    <arg1 type="var">LF@len</arg1>
+  </instruction>
+  <instruction order="34" opcode="POPFRAME"/>
+</program>

@@ -1,0 +1,18 @@
+.IPPcode19
+
+
+DEFVAR GF@var1
+DEFVAR GF@var2
+DEFVAR GF@var3
+
+MOVE GF@var1 bool@true
+MOVE GF@var2 bool@false
+
+and GF@var3 GF@var1 GF@var2
+WRITE GF@var3
+or GF@var3 GF@var1 GF@var2
+WRITE GF@var3
+not GF@var3 GF@var1
+WRITE GF@var3
+not GF@var3 GF@var3
+WRITE GF@var3

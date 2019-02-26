@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<program language="IPPcode19">
+  <instruction order="1" opcode="LABEL">
+    <arg1 type="label">jozko</arg1>
+  </instruction>
+  <instruction order="2" opcode="WRITE">
+    <arg1 type="string">jozko</arg1>
+  </instruction>
+  <instruction order="3" opcode="JUMP">
+    <arg1 type="label">ignac</arg1>
+  </instruction>
+  <instruction order="4" opcode="LABEL">
+    <arg1 type="label">ferko</arg1>
+  </instruction>
+  <instruction order="5" opcode="WRITE">
+    <arg1 type="string">ferko</arg1>
+  </instruction>
+  <instruction order="6" opcode="JUMP">
+    <arg1 type="label">matko</arg1>
+  </instruction>
+  <instruction order="7" opcode="WRITE">
+    <arg1 type="string">mrtvy_kod</arg1>
+  </instruction>
+  <instruction order="8" opcode="LABEL">
+    <arg1 type="label">matko</arg1>
+  </instruction>
+  <instruction order="9" opcode="WRITE">
+    <arg1 type="string">matko</arg1>
+  </instruction>
+  <instruction order="10" opcode="JUMP">
+    <arg1 type="label">__end__</arg1>
+  </instruction>
+  <instruction order="11" opcode="LABEL">
+    <arg1 type="label">ignac</arg1>
+  </instruction>
+  <instruction order="12" opcode="WRITE">
+    <arg1 type="string">ignac</arg1>
+  </instruction>
+  <instruction order="13" opcode="JUMP">
+    <arg1 type="label">ferko</arg1>
+  </instruction>
+  <instruction order="14" opcode="LABEL">
+    <arg1 type="label">__end__</arg1>
+  </instruction>
+  <instruction order="15" opcode="WRITE">
+    <arg1 type="string">endBRO</arg1>
+  </instruction>
+</program>

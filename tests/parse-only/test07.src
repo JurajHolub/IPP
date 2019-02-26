@@ -1,0 +1,388 @@
+.IPPcode19
+
+DEFVAR GF@var1
+
+MOVE GF@var1 string@\000
+
+WRITE GF@var1
+MOVE GF@var1 string@\001
+
+WRITE GF@var1
+MOVE GF@var1 string@\002
+
+WRITE GF@var1
+MOVE GF@var1 string@\003
+
+WRITE GF@var1
+MOVE GF@var1 string@\004
+
+WRITE GF@var1
+MOVE GF@var1 string@\005
+
+WRITE GF@var1
+MOVE GF@var1 string@\006
+
+WRITE GF@var1
+MOVE GF@var1 string@\007
+
+WRITE GF@var1
+MOVE GF@var1 string@\008
+
+WRITE GF@var1
+MOVE GF@var1 string@\009
+
+WRITE GF@var1
+MOVE GF@var1 string@\010
+
+WRITE GF@var1
+MOVE GF@var1 string@\011
+
+WRITE GF@var1
+MOVE GF@var1 string@\012
+
+WRITE GF@var1
+MOVE GF@var1 string@\013
+
+WRITE GF@var1
+MOVE GF@var1 string@\014
+
+WRITE GF@var1
+MOVE GF@var1 string@\015
+
+WRITE GF@var1
+MOVE GF@var1 string@\016
+
+WRITE GF@var1
+MOVE GF@var1 string@\017
+
+WRITE GF@var1
+MOVE GF@var1 string@\018
+
+WRITE GF@var1
+MOVE GF@var1 string@\019
+
+WRITE GF@var1
+MOVE GF@var1 string@\020
+
+WRITE GF@var1
+MOVE GF@var1 string@\021
+
+WRITE GF@var1
+MOVE GF@var1 string@\022
+
+WRITE GF@var1
+MOVE GF@var1 string@\023
+
+WRITE GF@var1
+MOVE GF@var1 string@\024
+
+WRITE GF@var1
+MOVE GF@var1 string@\025
+
+WRITE GF@var1
+MOVE GF@var1 string@\026
+
+WRITE GF@var1
+MOVE GF@var1 string@\027
+
+WRITE GF@var1
+MOVE GF@var1 string@\028
+
+WRITE GF@var1
+MOVE GF@var1 string@\029
+
+WRITE GF@var1
+MOVE GF@var1 string@\030
+
+WRITE GF@var1
+MOVE GF@var1 string@\031
+
+WRITE GF@var1
+MOVE GF@var1 string@\032
+
+WRITE GF@var1
+MOVE GF@var1 string@\033
+
+WRITE GF@var1
+MOVE GF@var1 string@\034
+
+WRITE GF@var1
+MOVE GF@var1 string@\035
+
+WRITE GF@var1
+MOVE GF@var1 string@\036
+
+WRITE GF@var1
+MOVE GF@var1 string@\037
+
+WRITE GF@var1
+MOVE GF@var1 string@\038
+
+WRITE GF@var1
+MOVE GF@var1 string@\039
+
+WRITE GF@var1
+MOVE GF@var1 string@\040
+
+WRITE GF@var1
+MOVE GF@var1 string@\041
+
+WRITE GF@var1
+MOVE GF@var1 string@\042
+
+WRITE GF@var1
+MOVE GF@var1 string@\043
+
+WRITE GF@var1
+MOVE GF@var1 string@\044
+
+WRITE GF@var1
+MOVE GF@var1 string@\045
+
+WRITE GF@var1
+MOVE GF@var1 string@\046
+
+WRITE GF@var1
+MOVE GF@var1 string@\047
+
+WRITE GF@var1
+MOVE GF@var1 string@\048
+
+WRITE GF@var1
+MOVE GF@var1 string@\049
+
+WRITE GF@var1
+MOVE GF@var1 string@\050
+
+WRITE GF@var1
+MOVE GF@var1 string@\051
+
+WRITE GF@var1
+MOVE GF@var1 string@\052
+
+WRITE GF@var1
+MOVE GF@var1 string@\053
+
+WRITE GF@var1
+MOVE GF@var1 string@\054
+
+WRITE GF@var1
+MOVE GF@var1 string@\055
+
+WRITE GF@var1
+MOVE GF@var1 string@\056
+
+WRITE GF@var1
+MOVE GF@var1 string@\057
+
+WRITE GF@var1
+MOVE GF@var1 string@\058
+
+WRITE GF@var1
+MOVE GF@var1 string@\059
+
+WRITE GF@var1
+MOVE GF@var1 string@\060
+
+WRITE GF@var1
+MOVE GF@var1 string@\061
+
+WRITE GF@var1
+MOVE GF@var1 string@\062
+
+WRITE GF@var1
+MOVE GF@var1 string@\063
+
+WRITE GF@var1
+MOVE GF@var1 string@\064
+
+WRITE GF@var1
+MOVE GF@var1 string@\065
+
+WRITE GF@var1
+MOVE GF@var1 string@\066
+
+WRITE GF@var1
+MOVE GF@var1 string@\067
+
+WRITE GF@var1
+MOVE GF@var1 string@\068
+
+WRITE GF@var1
+MOVE GF@var1 string@\069
+
+WRITE GF@var1
+MOVE GF@var1 string@\070
+
+WRITE GF@var1
+MOVE GF@var1 string@\071
+
+WRITE GF@var1
+MOVE GF@var1 string@\072
+
+WRITE GF@var1
+MOVE GF@var1 string@\073
+
+WRITE GF@var1
+MOVE GF@var1 string@\074
+
+WRITE GF@var1
+MOVE GF@var1 string@\075
+
+WRITE GF@var1
+MOVE GF@var1 string@\076
+
+WRITE GF@var1
+MOVE GF@var1 string@\077
+
+WRITE GF@var1
+MOVE GF@var1 string@\078
+
+WRITE GF@var1
+MOVE GF@var1 string@\079
+
+WRITE GF@var1
+MOVE GF@var1 string@\080
+
+WRITE GF@var1
+MOVE GF@var1 string@\081
+
+WRITE GF@var1
+MOVE GF@var1 string@\082
+
+WRITE GF@var1
+MOVE GF@var1 string@\083
+
+WRITE GF@var1
+MOVE GF@var1 string@\084
+
+WRITE GF@var1
+MOVE GF@var1 string@\085
+
+WRITE GF@var1
+MOVE GF@var1 string@\086
+
+WRITE GF@var1
+MOVE GF@var1 string@\087
+
+WRITE GF@var1
+MOVE GF@var1 string@\088
+
+WRITE GF@var1
+MOVE GF@var1 string@\089
+
+WRITE GF@var1
+MOVE GF@var1 string@\090
+
+WRITE GF@var1
+MOVE GF@var1 string@\091
+
+WRITE GF@var1
+MOVE GF@var1 string@\092
+
+WRITE GF@var1
+MOVE GF@var1 string@\093
+
+WRITE GF@var1
+MOVE GF@var1 string@\094
+
+WRITE GF@var1
+MOVE GF@var1 string@\095
+
+WRITE GF@var1
+MOVE GF@var1 string@\096
+
+WRITE GF@var1
+MOVE GF@var1 string@\097
+
+WRITE GF@var1
+MOVE GF@var1 string@\098
+
+WRITE GF@var1
+MOVE GF@var1 string@\099
+
+WRITE GF@var1
+MOVE GF@var1 string@\100
+
+WRITE GF@var1
+MOVE GF@var1 string@\101
+
+WRITE GF@var1
+MOVE GF@var1 string@\102
+
+WRITE GF@var1
+MOVE GF@var1 string@\103
+
+WRITE GF@var1
+MOVE GF@var1 string@\104
+
+WRITE GF@var1
+MOVE GF@var1 string@\105
+
+WRITE GF@var1
+MOVE GF@var1 string@\106
+
+WRITE GF@var1
+MOVE GF@var1 string@\107
+
+WRITE GF@var1
+MOVE GF@var1 string@\108
+
+WRITE GF@var1
+MOVE GF@var1 string@\109
+
+WRITE GF@var1
+MOVE GF@var1 string@\110
+
+WRITE GF@var1
+MOVE GF@var1 string@\111
+
+WRITE GF@var1
+MOVE GF@var1 string@\112
+
+WRITE GF@var1
+MOVE GF@var1 string@\113
+
+WRITE GF@var1
+MOVE GF@var1 string@\114
+
+WRITE GF@var1
+MOVE GF@var1 string@\115
+
+WRITE GF@var1
+MOVE GF@var1 string@\116
+
+WRITE GF@var1
+MOVE GF@var1 string@\117
+
+WRITE GF@var1
+MOVE GF@var1 string@\118
+
+WRITE GF@var1
+MOVE GF@var1 string@\119
+
+WRITE GF@var1
+MOVE GF@var1 string@\120
+
+WRITE GF@var1
+MOVE GF@var1 string@\121
+
+WRITE GF@var1
+MOVE GF@var1 string@\122
+
+WRITE GF@var1
+MOVE GF@var1 string@\123
+
+WRITE GF@var1
+MOVE GF@var1 string@\124
+
+WRITE GF@var1
+MOVE GF@var1 string@\125
+
+WRITE GF@var1
+MOVE GF@var1 string@\126
+
+WRITE GF@var1
+MOVE GF@var1 string@\127
+
+WRITE GF@var1

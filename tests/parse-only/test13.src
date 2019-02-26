@@ -1,0 +1,9 @@
+.IPPcode19
+defvar GF@var
+move GF@var string@reeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+write GF@var
+write string@\010
+
+SETCHAR GF@var int@8 string@O____________O#######x________
+
+WRITE GF@var

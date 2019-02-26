@@ -1,0 +1,16 @@
+.IPPcode19
+
+
+DEFVAR GF@var1
+DEFVAR GF@var2
+DEFVAR GF@var3
+
+MOVE GF@var1 int@4568
+MOVE GF@var2 int@-5213
+
+LT GF@var3 GF@var1 GF@var2
+WRITE GF@var3
+GT GF@var3 GF@var1 GF@var2
+WRITE GF@var3
+EQ GF@var3 GF@var1 GF@var2
+WRITE GF@var3

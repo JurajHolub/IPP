@@ -1,0 +1,9 @@
+.IPPcode19
+DEFVAR GF@var
+PUSHS int@65
+POPS GF@var
+DEFVAR GF@res
+INT2CHAR GF@res GF@var
+WRITE GF@res
+INT2CHAR GF@res int@66
+WRITE GF@res

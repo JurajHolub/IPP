@@ -1,0 +1,4 @@
+.IPPcode19
+defvar GF@ferko
+conCAT GF@ferko string@prvy_ string@druhy
+WRITE GF@ferko
