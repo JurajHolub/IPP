@@ -16,10 +16,29 @@ const WHITE_SPACE = array("\t", " ");
 const NEW_LINE = array("\n");
 const INST_OP_0 = array("CREATEFRAME", "PUSHFRAME", "POPFRAME", "RETURN", "BREAK");
 
+$help = <<<EOS
+Filter script parse.php read input IPPcode19 source code from stdin and check
+lexical and syntactical correctnes of code and write XML representation of this
+program to stdout.
+Usage:
+    --help : Print this message.
+
+EOS;
+
 class Token {
     public $id;
     public $val;
 }
+
+//handle parameters
+if ($argc == 2 and $argv[1] === "--help")
+{
+    echo($help);
+    exit(0);
+}
+if ($argc > 2)
+    exit(10);
+
 
 $generator = new XML_Generator();
 $inst = array();

@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * @file xml_generator.php
+ * @brief Generate XML representation of IPPcode19 with DOMDocument library.
+ * @author Juraj Holub <xholub40@stud.fit.vutbr.cz>
+ * @date February 2019
+ * @project IPP 2018/2019
+ */
+
 class XML_Generator {
     public $xml;
     public $inst_cnt;

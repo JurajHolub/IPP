@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * @file tokens_analyzer.php
+ * @brief Parse input string to tokens which are send to FSM.
+ * @author Juraj Holub <xholub40@stud.fit.vutbr.cz>
+ * @date February 2019
+ * @project IPP 2018/2019
+ */
+
 class Tokens_Analyzer {
 
     var $key_words = array(

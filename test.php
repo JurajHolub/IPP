@@ -9,6 +9,7 @@
  */
 
 include 'test_cmd_args.php';
+include 'html5_generator.php';
 
 $TEST_HELP = <<<EOS
 Script test.php automtaicly test applications parse.php and interpret.py. Script
@@ -70,7 +71,9 @@ switch ($cmd_args->what_to_do())
         //execute parser
         $tests = new AllTests();
         $tests->search_test_files($cmd_args->dir_path, $cmd_args->recursive);
+        $html_gen = new HTML5_Generator();
 
+        $html_gen->gen_header();
         foreach ($tests->tests as $test)
         {
             $src = $test . ".src";
@@ -87,33 +90,11 @@ switch ($cmd_args->what_to_do())
             exec($jexamxml, $dump, $ret_val);
 
             if ($ret_val == 0)
-                echo "Test: ". $test ." SUCCESS.\n";
+                $html_gen->gen_test($test, True);
             else
-                echo "Test: ". $test ." FAIL.\n";
+                $html_gen->gen_test($test, False);
         }
-
-            //if (endsWith(".src", $file))
-            //{
-            //    $file_src = $dir_iter->getPath()."/".$file;
-            //    $file_src_parse = $dir_iter->getPath()."/".$file."_parse";
-            //    $file_src_parse = $dir_iter->getPath()."/".$file."_parse";
-            //    $parse = "php7.3 ".$cmd_args->parse_script_file.
-            //    " <" . $file_src .">". $file_src_parse;
-            //    //echo $parse, "\n";
-            //    exec($parse);
-
-
-            //    $jexamxml = "java -jar ". $cmd_args->xml_file . 
-            //    " " . $cmd_args->dir_path . " " . $file_src .
-            //    " " . $cmd_args->dir_path . " " . $file_src_parse;
-            //    //echo $jexamxml . "\n";
-            //    exec($jexamxml, $out, $ret_val);
-
-            //    if ($ret_val == 0)
-            //        echo "Test ". $file_src ." success.";
-            //    else
-            //        echo "Test ". $file_src ." fail.";
-            //}
+        $html_gen->gen_end();
 
     break;
     case "TEST_BOTH":

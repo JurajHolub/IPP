@@ -94,7 +94,7 @@ class TestCmdArgs {
             $this->dir = "ERROR_SET";    
     }
 
-    public function parser_file($arg)
+    public function int_file($arg)
     {
         $list = explode("=", $arg);
         if (count($list) == 2 and is_file($list[1]))
@@ -106,16 +106,16 @@ class TestCmdArgs {
             $this->int_script = "ERROR_SET";    
     }
 
-    public function int_file($arg)
+    public function parse_file($arg)
     {
         $list = explode("=", $arg);
         if (count($list) == 2 and is_file($list[1]))
         {
-            $this->parser_script = "SET";    
-            $this->parser_script_file = $list[1];    
+            $this->parse_script = "SET";    
+            $this->parse_script_file = $list[1];    
         }
         else
-            $this->parser_script = "ERROR_SET";    
+            $this->parse_script = "ERROR_SET";    
     }
 
     public function parse_xml($arg)
