@@ -8,10 +8,12 @@
 @date March 2019
 """
 
+import sys
 import xml_parser
 import argument_parser
 import string_convertor_fsm
 from xml_parser import *
+from error_handle import *
 
 class Nil:
     """ Represent nil type of IPPcode19 """
