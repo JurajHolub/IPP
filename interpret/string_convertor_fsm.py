@@ -1,4 +1,15 @@
+#!/usr/bin/env python3
+
+"""
+@file string_convertor_fsm.py
+@brief Convert IPPcode19 string to printable string (e.g. \010 to new line).
+@project FIT VUT - IPP interpret
+@author Juraj Holub <xholub40>
+@date March 2019
+"""
+
 class StringConvertorFSM:
+    """ Implemented like Finite State Machine"""
 
     S_BEGIN = 1
     S_BRACKET = 2

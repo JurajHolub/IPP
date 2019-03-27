@@ -1,3 +1,13 @@
+#!/usr/bin/env python3
+
+"""
+@file error_handle.py
+@brief Definition of error classes for interpret runtime exception handling.
+@project FIT VUT - IPP interpret
+@author Juraj Holub <xholub40>
+@date March 2019
+"""
+
 class Error(Exception):
     pass
 

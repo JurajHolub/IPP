@@ -1,15 +1,24 @@
 #!/usr/bin/env python3
 
-import sys
+"""
+@file interpret.py
+@brief Main body of program + implementation of interpret it self.
+@project FIT VUT - IPP interpret
+@author Juraj Holub <xholub40>
+@date March 2019
+"""
+
 import xml_parser
 import argument_parser
 import string_convertor_fsm
 from xml_parser import *
 
 class Nil:
+    """ Represent nil type of IPPcode19 """
     pass
 
 class Stack:
+    """ Simple stack implementation. Used in interpret local, global, temporary frame and data stack for push/pop. """
     def __init__(self, error_handle):
         self.stack = []
         self.error_handle = error_handle
@@ -34,7 +43,8 @@ class Stack:
             print(item)
 
 class Interpret(object):
-    """ Semantic error input IPPcode19 (e.g. undefined label) """
+    """ Implementation of interpret it self. For every instruction there is one function."""
+
     SEMANTIC_ERR = 52
     RUNTIME_ERR_WRONG_OPERANDS_TYPE = 53
     RUNTIME_ERR_UNDEF_VAR = 54
@@ -416,7 +426,7 @@ for inst, order in instructions:
 
     try:
         instruction_to_parse = getattr(interpret, inst.attrib["opcode"])
-        instruction_to_parse(inst)
+        instruction_to_parse(inst) # execute one instruction
         interpret.inc_idx()
     except AttributeError:
         sys.stderr.write(str(idx-1)+": Instruction \""+ inst.attrib["opcode"]+"\" not exist!\n")

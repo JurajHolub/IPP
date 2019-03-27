@@ -1,3 +1,13 @@
+#!/usr/bin/env python3
+
+"""
+@file argument_parser.py
+@brief Parse arguments from command line and decide what to do.
+@project FIT VUT - IPP interpret
+@author Juraj Holub <xholub40>
+@date March 2019
+"""
+
 import os
 
 HELP_MESSAGE ="""Script load XML representation of input program and interprete it.

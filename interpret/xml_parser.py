@@ -1,7 +1,16 @@
+#!/usr/bin/env python3
+
+"""
+@file xml_parser.py
+@brief Parse input XML file with xml representation of IPPcode19, check correct syntax and
+extract all instructions to list.
+@project FIT VUT - IPP interpret
+@author Juraj Holub <xholub40>
+@date March 2019
+"""
+
 import xml.dom.minidom
 import xml.etree.ElementTree
-import sys
-from error_handle import *
 
 class XMLParser(object):
 
