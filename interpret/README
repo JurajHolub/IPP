@@ -1,0 +1,4 @@
+USAGE
+-----
+
+python3.6 interpret.py --source=file.xml
