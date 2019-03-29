@@ -52,3 +52,7 @@ class SemanticError(Error):
 class RuntimeErrorWrongOperandsType(Error):
     def __init__(self, line):
         self.line = str(line)
+
+class ExitInstruction(Error):
+    def __init__(self, ret_code):
+        self.ret_code = ret_code

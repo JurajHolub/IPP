@@ -24,7 +24,7 @@ class XMLParser(object):
 
     def error_xml_header(self):
         dom = xml.dom.minidom.parse(self.cmd_args.source)
-        if dom.encoding == "UTF-8" and dom.version == "1.0":
+        if dom.encoding.upper() != "UTF-8" and dom.version != "1.0":
             return True
         else:
             return False
@@ -42,9 +42,11 @@ class XMLParser(object):
             return XMLParser.NOT_WELL_FORMED_XML
 
         if root.tag == "program" and "language" in root.attrib and str.lower(root.attrib["language"]) == "ippcode19":
-            if len(root.attrib) == 2 and ("description" not in root.attrib and "name" not in root.attrib):
+            if len(root.attrib) == 3 and ("description" not in root.attrib and "name" not in root.attrib):
                 return XMLParser.UNSUPPORTED_XML_ELEMENT
-            elif len(root.attrib) == 3 and ("description" not in root.attrib) or ("name" not in root.attrib):
+            elif len(root.attrib) == 2 and ("description" not in root.attrib or "name" not in root.attrib):
+                return XMLParser.UNSUPPORTED_XML_ELEMENT
+            elif len(root.attrib) > 3:
                 return XMLParser.UNSUPPORTED_XML_ELEMENT
         else:
             return XMLParser.UNSUPPORTED_XML_ELEMENT

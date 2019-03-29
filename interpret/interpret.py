@@ -17,7 +17,17 @@ from error_handle import *
 
 class Nil:
     """ Represent nil type of IPPcode19 """
-    pass
+    def __eq__(self, other):
+        if type(other) is Nil:
+            return True
+        else:
+            return False
+
+    def __ne__(self, other):
+        if type(other) is Nil:
+            return False
+        else:
+            return True
 
 class Stack:
     """ Simple stack implementation. Used in interpret local, global, temporary frame and data stack for push/pop. """
@@ -63,12 +73,21 @@ class Interpret(object):
         self.local_frame_stack = Stack(RuntimeErrorNonExistFrame)
         self.data_stack = Stack(RuntimeErrorMissingValue)
         self.inst_idx = 1
+        self.label_position = dict()
 
     def inc_idx(self):
         self.inst_idx += 1
 
     def get_line(self):
         return str(self.inst_idx)
+
+    def save_label(self, inst, idx):
+        if inst.attrib["opcode"].upper() == "LABEL":
+            label_type, label_name = interpret.get_argument(inst, 1)
+            if label_name in self.label_position:
+                raise SemanticError(idx)
+            else:
+                self.label_position[label_name] = idx
 
     def add_global_variable(self, var_name, var_val):
         if var_name in self.global_frame:
@@ -394,6 +413,107 @@ class Interpret(object):
 
         self.set_variable(var_name, var_value)
 
+    def JUMP(self, inst):
+        """ JUMP <label>"""
+        label_type, label_name = self.get_argument(inst, 1)
+        if label_name in self.label_position:
+            self.inst_idx = self.label_position[label_name]
+        else:
+            raise SemanticError(self.get_line())
+
+    def LABEL(self, inst):
+        """ LABEL <label>"""
+        label_type, label_name = self.get_argument(inst, 1)
+
+    def JUMPIFNEQ(self, inst):
+        """ JUMPIFNEQ <label> <symb> <symb>"""
+        label_type, label_name = self.get_argument(inst, 1)
+        symb_type1, symb_name1 = self.get_argument(inst, 2)
+        symb_type2, symb_name2 = self.get_argument(inst, 3)
+
+        symb_value1 = self.get_symbol(symb_type1, symb_name1)
+        symb_value2 = self.get_symbol(symb_type2, symb_name2)
+
+        if type(symb_value1) != type(symb_value2):
+            raise RuntimeErrorWrongOperandsType(self.get_line())
+
+        if symb_value1 != symb_value2:
+            if label_name in self.label_position:
+                self.inst_idx = self.label_position[label_name]
+            else:
+                raise SemanticError(self.get_line())
+
+    def JUMPIFEQ(self, inst):
+        """ JUMPIFEQ <label> <symb> <symb>"""
+        label_type, label_name = self.get_argument(inst, 1)
+        symb_type1, symb_name1 = self.get_argument(inst, 2)
+        symb_type2, symb_name2 = self.get_argument(inst, 3)
+
+        symb_value1 = self.get_symbol(symb_type1, symb_name1)
+        symb_value2 = self.get_symbol(symb_type2, symb_name2)
+
+        if type(symb_value1) != type(symb_value2):
+            raise RuntimeErrorWrongOperandsType(self.get_line())
+
+        if symb_value1 == symb_value2:
+            if label_name in self.label_position:
+                self.inst_idx = self.label_position[label_name]
+            else:
+                raise SemanticError(self.get_line())
+
+    def EXIT(self, inst):
+        """ EXIT <symb>"""
+        symb_type, symb_name = self.get_argument(inst, 1)
+        symb_value = self.get_symbol(symb_type, symb_name)
+        if type(symb_value) is int and 0 <= symb_value <= 49:
+            raise ExitInstruction(symb_value)
+        else:
+            raise RuntimeErrorWrongOperandValue(self.get_line(), str(symb_value), "NOT EXIST", "EXIT")
+
+    def DPRINT(self, inst):
+        """ DPRINT <symb>"""
+        symb_type, symb_value = self.get_argument(inst, 1)
+        if symb_type == "var" or symb_type in Interpret.CONST_SYMBOLS:
+            symb_value = self.get_symbol(symb_type, symb_value)
+            if type(symb_value) is str:
+                convertor = string_convertor_fsm.StringConvertorFSM()
+                symb_value = convertor.convert(symb_value)
+            sys.stderr.write(symb_value)
+        elif symb_type == "nil":
+            pass  # print nothing
+
+    def BREAK(self, inst):
+        """ BREAK """
+        sys.stderr.write("Line:" + self.get_line() + "\n")
+
+    def READ(self, inst):
+        """ READ <var> <type>"""
+        var_type, var_name = self.get_argument(inst, 1)
+        symb_type, symb_value = self.get_argument(inst, 2)
+        symb_value = self.get_symbol(symb_type, symb_value)
+
+        if var_type != "var":
+            raise RuntimeErrorWrongOperandsType(self.get_line())
+
+        input_value = input()
+
+        if symb_type == "type" and symb_value == "int":
+            try:
+                input_value = int(input_value)
+            except ValueError:
+                input_value = 0
+        elif symb_type == "type" and symb_value == "string":
+            pass
+        elif symb_type == "type" and symb_value == "bool":
+            if input_value.lower() == "true":
+                input_value = True
+            else:
+                input_value = False
+        else:
+            raise RuntimeErrorWrongOperandsType(self.get_line())
+
+        self.set_variable(var_name, input_value)
+
 #################################################################
 ########################### MAIN BODY ###########################
 #################################################################
@@ -417,19 +537,24 @@ if result != XMLParser.PARSE_SUCCES:
     exit(result)
 
 instructions = parser.get_instructions()
-
-idx = 1
 instructions.sort(key=lambda tup: tup[1])
 interpret = Interpret()
+
+idx = 1
 for inst, order in instructions:
     if order != idx:
         exit(XMLParser.UNSUPPORTED_XML_ELEMENT)
+    interpret.save_label(inst, idx)
     idx += 1
 
+i = 0
+while i < len(instructions):
+    inst, order = instructions[i]
     try:
-        instruction_to_parse = getattr(interpret, inst.attrib["opcode"])
+        instruction_to_parse = getattr(interpret, inst.attrib["opcode"].upper())
         instruction_to_parse(inst) # execute one instruction
         interpret.inc_idx()
+        i = interpret.inst_idx - 1
     except AttributeError:
         sys.stderr.write(str(idx-1)+": Instruction \""+ inst.attrib["opcode"]+"\" not exist!\n")
         exit(XMLParser.UNSUPPORTED_XML_ELEMENT)
@@ -460,4 +585,6 @@ for inst, order in instructions:
     except SemanticError as e:
         sys.stderr.write(e.line+": Semantic error!")
         exit(Interpret.SEMANTIC_ERR)
+    except ExitInstruction as e:
+        exit(e.ret_code)
 exit(XMLParser.PARSE_SUCCES)

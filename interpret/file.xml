@@ -1,81 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?>
-<program language="IPPcode19"
-         description="Description of program"
-         name="Name of program" >
-  <instruction order="1" opcode="DEFVAR">
-    <arg1 type="var">GF@var</arg1>
+<?xml version="1.0" encoding="UTF-8"?>
+<program language="IPPcode19">
+  <instruction order="1" opcode="WRITE">
+    <arg1 type="string">aaaa</arg1>
   </instruction>
-  <instruction order="2" opcode="MOVE">
-    <arg1 type="var">GF@var</arg1>
-    <arg2 type="int">86</arg2>
-  </instruction>
-  <instruction order="3" opcode="WRITE">
-    <arg1 type="string">\010</arg1>
-  </instruction>
-  <instruction order="4" opcode="CREATEFRAME"/>
-  <instruction order="5" opcode="DEFVAR">
-    <arg1 type="var">TF@var</arg1>
-  </instruction>
-  <instruction order="6" opcode="MOVE">
-    <arg1 type="var">TF@var</arg1>
-    <arg2 type="string">fero</arg2>
-  </instruction>
-  <instruction order="7" opcode="WRITE">
-    <arg1 type="var">TF@var</arg1>
-  </instruction>
-  <instruction order="8" opcode="PUSHFRAME"/>
-  <instruction order="9" opcode="MOVE">
-    <arg1 type="var">LF@var</arg1>
+  <instruction order="2" opcode="JUMPIFNEQ">
+    <arg1 type="label">_____1</arg1>
     <arg2 type="string">adam</arg2>
+    <arg3 type="string">eva</arg3>
   </instruction>
-  <instruction order="10" opcode="WRITE">
-    <arg1 type="var">LF@var</arg1>
+  <instruction order="3" opcode="LABEL">
+    <arg1 type="label">_____2</arg1>
   </instruction>
-  <instruction order="11" opcode="POPFRAME"/>
-  <instruction order="12" opcode="DEFVAR">
-    <arg1 type="var">GF@var1</arg1>
+  <instruction order="4" opcode="WRITE">
+    <arg1 type="string">bbbb</arg1>
   </instruction>
-  <instruction order="13" opcode="MOVE">
-    <arg1 type="var">GF@var1</arg1>
-    <arg2 type="string">10</arg2>
+  <instruction order="5" opcode="JUMP">
+    <arg1 type="label">_____3</arg1>
   </instruction>
-  <instruction order="14" opcode="DEFVAR">
-    <arg1 type="var">GF@var2</arg1>
+  <instruction order="6" opcode="WRITE">
+    <arg1 type="string">cccccc</arg1>
   </instruction>
-  <instruction order="15" opcode="MOVE">
-    <arg1 type="var">GF@var2</arg1>
-    <arg2 type="string">20</arg2>
+  <instruction order="7" opcode="LABEL">
+    <arg1 type="label">_____1</arg1>
   </instruction>
-  <instruction order="16" opcode="CONCAT">
-    <arg1 type="var">GF@var1</arg1>
-    <arg2 type="var">GF@var1</arg2>
-    <arg3 type="var">GF@var2</arg3>
+  <instruction order="8" opcode="WRITE">
+    <arg1 type="string">ddddd</arg1>
   </instruction>
-  <instruction order="17" opcode="WRITE">
-    <arg1 type="var">GF@var1</arg1>
-  </instruction>
-  <instruction order="18" opcode="PUSHS">
-    <arg1 type="string">string_to_push</arg1>
-  </instruction>
-  <instruction order="19" opcode="POPS">
-    <arg1 type="var">GF@var1</arg1>
-  </instruction>
-  <instruction order="20" opcode="WRITE">
-    <arg1 type="var">GF@var1</arg1>
-  </instruction>
-  <instruction order="21" opcode="INT2CHAR">
-    <arg1 type="var">GF@var1</arg1>
-    <arg2 type="var">GF@var</arg2>
-  </instruction>
-  <instruction order="22" opcode="MOVE">
-    <arg1 type="var">GF@var1</arg1>
+  <instruction order="9" opcode="JUMPIFEQ">
+    <arg1 type="label">_____2</arg1>
     <arg2 type="nil">nil</arg2>
+    <arg3 type="nil">nil</arg3>
   </instruction>
-  <instruction order="23" opcode="TYPE">
-    <arg1 type="var">GF@var1</arg1>
-    <arg2 type="var">GF@var1</arg2>
+  <instruction order="10" opcode="LABEL">
+    <arg1 type="label">_____3</arg1>
   </instruction>
-  <instruction order="24" opcode="WRITE">
-    <arg1 type="var">GF@var1</arg1>
+  <instruction order="11" opcode="LABEL">
+    <arg1 type="label">_____4</arg1>
+  </instruction>
+  <instruction order="12" opcode="WRITE">
+    <arg1 type="string">eeeeeeee</arg1>
+  </instruction>
+  <instruction order="13" opcode="EXIT">
+    <arg1 type="int">0</arg1>
   </instruction>
 </program>
