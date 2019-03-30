@@ -37,12 +37,12 @@ class Stack:
 
     def pop(self, inst_idx):
         try:
-            self.stack.pop()
+            self.stack.pop(0)
         except:
             raise self.error_handle(inst_idx)
 
     def push(self, item):
-        self.stack.append(item)
+        self.stack.insert(0, item)
 
     def top(self, inst_idx):
         try:
@@ -74,6 +74,7 @@ class Interpret(object):
         self.data_stack = Stack(RuntimeErrorMissingValue)
         self.inst_idx = 1
         self.label_position = dict()
+        self.call_stack =Stack(RuntimeErrorMissingValue)
 
     def inc_idx(self):
         self.inst_idx += 1
@@ -112,8 +113,11 @@ class Interpret(object):
         elif type == "bool":
             if not XMLParser.is_bool_constant(value):
                 raise XMLOperandError(self.inst_idx, "arg" + str(idx), inst.attrib["opcode"], value, "bool")
-            value.title()  # Capitalize first letter of true, false => python compatibility
-            value = bool(value)
+            value = value.title()  # Capitalize first letter of true, false => python compatibility
+            if value.title() == "False":
+                value = False
+            else:
+                value = True
         elif type == "string":
             if not XMLParser.is_string_constant(value):
                 raise XMLOperandError(self.inst_idx, "arg" + str(idx), inst.attrib["opcode"], value, "string")
@@ -240,14 +244,14 @@ class Interpret(object):
         val2 = self.get_symbol(type3, value3)
 
         if op in ["+", "-", "*", "//"] and type(val1) is int and type(val2) is int:
-            res = eval("val1 " + op + "val2")
+            res = eval("val1 " + op + " val2")
         elif op in ["and", "or"] and type(val1) is bool and type(val2) is bool:
-            res = eval("val1 " + op + "val2")
+            res = eval("val1 " + op + " val2")
         elif op in [">", "==", "<"] and \
                 (type(val1) is bool and type(val2) is bool or \
                  type(val1) is int and type(val2) is int or \
                  type(val1) is str and type(val2) is str):
-            res = eval("val1 " + op + "val2")
+            res = eval("val1 " + op + " val2")
         elif op == "CONCAT" and type(val1) is str and type(val2) is str:
             res = val1 + val2
         else:
@@ -290,6 +294,20 @@ class Interpret(object):
     def EQ(self, inst):
         """ EQ <var> <symb> <symb>"""
         self.binary_operation(inst, "==")
+
+    def NOT(self, inst):
+        """ NOT <var> <symb> """
+        type1, value1 = self.get_argument(inst, 1)
+        type2, value2 = self.get_argument(inst, 2)
+
+        val1 = self.get_symbol(type2, value2)
+
+        if type(val1) is bool:
+            res = not val1
+        else:
+            raise RuntimeErrorWrongOperandValue(self.inst_idx, val1, "NOT EXIST", "NOT")
+
+        self.set_variable(value1, res)
 
     def CONCAT(self, inst):
         """ CONCAT <var> <symb> <symb>"""
@@ -461,6 +479,20 @@ class Interpret(object):
             else:
                 raise SemanticError(self.get_line())
 
+    def CALL(self, inst):
+        """ CALL <label> """
+        label_type, label_name = self.get_argument(inst, 1)
+
+        if label_name in self.label_position:
+            self.call_stack.push(self.inst_idx)
+            self.inst_idx = self.label_position[label_name]
+        else:
+            raise SemanticError(self.get_line())
+
+    def RETURN(self, inst):
+        """ RETURN """
+        self.inst_idx = self.call_stack.top(self.get_line())
+
     def EXIT(self, inst):
         """ EXIT <symb>"""
         symb_type, symb_name = self.get_argument(inst, 1)
@@ -526,9 +558,6 @@ if cmd_args.what_to_do() == argument_parser.ArgumentParser.ERROR:
 elif cmd_args.what_to_do() == argument_parser.ArgumentParser.HELP:
     print(argument_parser.HELP_MESSAGE)
     sys.exit(0)
-elif cmd_args.what_to_do() == argument_parser.ArgumentParser.INTERPRET:
-    print("source: ", cmd_args.source)
-    print("input: ", cmd_args.input)
 
 parser = xml_parser.XMLParser(cmd_args)
 result = parser.parse()
@@ -562,7 +591,10 @@ while i < len(instructions):
         sys.stderr.write(e.line+": "+e.inst + " "+e.arg+" has wrong argument \"" + e.wrong_operand + "\" (\""+e.expected_operand+"\" expected).")
         exit(XMLParser.UNSUPPORTED_XML_ELEMENT)
     except SyntaxError as e:
-        sys.stderr.write(interpret.get_line()+": "+inst.attrib["opcode"] + " not supported yet")
+        sys.stderr.write(interpret.get_line()+": \""+inst.attrib["opcode"] + "\" not supported instruction.")
+        print(interpret.get_argument(inst, 1))
+        print(interpret.get_argument(inst, 2))
+        print(interpret.get_argument(inst, 3))
         exit(XMLParser.UNSUPPORTED_XML_ELEMENT)
     except RuntimeErrorUndefVar as e:
         sys.stderr.write(e.line+": "+"Undefined variable \""+ e.variable +"\" in frame \""+ e.frame +"\"")

@@ -51,7 +51,7 @@ class Tokens_Analyzer {
 
     public function is_type($token)
     {
-        return (in_array($token, ["string", "bool", "nil", "int"]));
+        return (in_array($token, ["string", "bool", "int"]));
     }
 
     public function is_label($token)
@@ -104,7 +104,8 @@ class Tokens_Analyzer {
 
     public function is_string_constant($token)
     {
-        $list = explode("@", $token);
+        //$list = explode("@", $token);
+        $list = preg_split("/@/", $token, 2);
 
         if (count($list) != 2)
             return false;
@@ -242,6 +243,8 @@ class Tokens_Analyzer {
             }
         }
 
+        if ($token !== "")
+            return $this->parse_token($token);
         $ret = new Token();
         $ret->id = "T_EOF";
         $ret->val = "";

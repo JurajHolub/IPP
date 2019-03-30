@@ -69,7 +69,7 @@ class TestCmdArgs {
                 $this->recursive = "SET";
             else if (startsWith("--parse-script=", $arg))
                 $this->parser_file($arg);
-            else if (startsWith("----int-script=", $arg))
+            else if (startsWith("--int-script=", $arg))
                 $this->int_file($arg);
             else if ($arg === "--parse-only")
                 $this->parse_only = "SET";

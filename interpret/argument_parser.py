@@ -56,7 +56,7 @@ class ArgumentParser(object):
                     self.error = True
             elif arg.startswith("--input="):
                 file = arg[len("--input="):]
-                if os.path.isFile(file):
+                if os.path.isfile(file):
                     self.input = file
                 else:
                     self.error = True

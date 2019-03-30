@@ -45,7 +45,7 @@ class AllTests {
             $dir_iter = new RecursiveDirectoryIterator($dir);
         foreach ($dir_iter as $file)
         {
-            $parse_file = explode(".", $file);
+            $parse_file = preg_split("/\.(?=[^\.]*$)/", $file);
             if (count($parse_file) == 2 and $parse_file[1] === "src")
             {
                 array_push($this->tests, $parse_file[0]);
@@ -64,7 +64,56 @@ switch ($cmd_args->what_to_do())
         echo $TEST_HELP;
     break;
     case "TEST_INT_ONLY":
-        echo "interpret.py not implemented yet.";
+        $tests = new AllTests();
+        $tests->search_test_files($cmd_args->dir_path, $cmd_args->recursive);
+        $html_gen = new HTML5_Generator();
+
+        $html_gen->gen_header();
+        foreach ($tests->tests as $test)
+        {
+            $src = $test . ".src";
+            $in = $test . ".in";
+            $out = $test . ".out";
+            $rc = $test . ".rc";
+
+            if (!file_exists($in))
+                exec("touch ".$in);
+            if (!file_exists($out))
+                exec("touch ".$out);
+
+            $interpret = "python3.6 ".$cmd_args->int_script_file.
+                " --source=" . $src ." --input=". $in . " < " . $in;
+            exec($interpret, $my_output, $int_ret_val);
+            $my_output = implode("\n", $my_output);
+
+            $expected_output = file_get_contents($out);
+
+            if (is_readable($rc))
+            {
+                $expected_rc = fopen($rc, "r");
+                fscanf($expected_rc,"%d", $expected_int_ret_val);
+                fclose($expected_rc);
+            }
+            else
+                $expected_int_ret_val = 0;
+
+
+            if ($int_ret_val == $expected_int_ret_val)
+            {
+                if ($int_ret_val == 0)
+                {
+                    if ($expected_output !== $my_output)
+                        $html_gen->gen_test($test, False);
+                    else
+                        $html_gen->gen_test($test, True);
+                }
+                else
+                    $html_gen->gen_test($test, True);
+            }
+            else
+                $html_gen->gen_test($test, False);
+        }
+        $html_gen->gen_end();
     break;
     case "TEST_PARSE_ONLY":
 
@@ -84,15 +133,36 @@ switch ($cmd_args->what_to_do())
 
             $parse = "php7.3 ".$cmd_args->parse_script_file.
             " <" . $src .">". $my_out;
-            exec($parse);
+            exec($parse, $dump, $parse_ret_val);
 
             $jexamxml = "java -jar ". $cmd_args->xml_file . " " . $out . " " . $my_out;
-            exec($jexamxml, $dump, $ret_val);
+            exec($jexamxml, $dump, $jexam_ret_val);
 
-            if ($ret_val == 0)
-                $html_gen->gen_test($test, True);
+            if (is_readable($rc))
+            {
+                $expected_rc = fopen($rc, "r");
+                fscanf($expected_rc,"%d", $expected_parse_ret_val);
+                fclose($expected_rc);
+            }
             else
-                $html_gen->gen_test($test, False);
+                $expected_parse_ret_val = 0;
+
+            if ($parse_ret_val != $expected_parse_ret_val)
+                if (in_array($parse_ret_val, [21,22,23]) and in_array($expected_parse_ret_val, [21,22,23]))
+                    $html_gen->gen_test($test, True);
+                else
+                    $html_gen->gen_test($test, False);
+            else
+            {
+                if ($parse_ret_val != 0)
+                    $html_gen->gen_test($test, True);
+                else if ($parse_ret_val == 0 and $jexam_ret_val == 0)
+                    $html_gen->gen_test($test, True);
+                else
+                    $html_gen->gen_test($test, False);
+            }
+
+            //exec("rm ".$my_out);
         }
         $html_gen->gen_end();
 
