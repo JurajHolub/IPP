@@ -186,15 +186,27 @@ class Interpret(object):
         self.temporary_frame = dict()
 
     def PUSHFRAME(self, inst):
+        self.local_frame_stack = Stack(RuntimeErrorNonExistFrame)
+
+        if self.temporary_frame is None:
+            raise RuntimeErrorNonExistFrame(self.get_line())
+
         self.local_frame_stack.push(self.temporary_frame)
+        self.temporary_frame = None
 
     def POPFRAME(self, inst):
         self.temporary_frame = self.local_frame_stack.top(self.get_line())
         self.local_frame_stack.pop(self.get_line())
 
     def PUSHS(self, inst):
-        type, name = self.get_argument(inst, 1)
-        self.data_stack.push((type, name))
+        """ PUSHS <symb>"""
+        symb_type, symb_value = self.get_argument(inst, 1)
+        symb_value = self.get_symbol(symb_type, symb_value)
+
+        if symb_type == "label":
+            raise RuntimeErrorWrongOperandsType(self.get_line())
+
+        self.data_stack.push((symb_type, symb_value))
 
     def POPS(self, inst):
         var_type, var_name = self.get_argument(inst, 1)
@@ -218,6 +230,11 @@ class Interpret(object):
         """ MOVE <var> <symb>"""
         var_type, var_name = self.get_argument(inst, 1)
         symb_type, symb_value = self.get_argument(inst, 2)
+
+        if symb_type not in ["var", "int", "bool", "string"]:
+            raise RuntimeErrorWrongOperandsType(self.get_line())
+
+        symb_value = self.get_symbol(symb_type, symb_value)
 
         self.set_variable(var_name, symb_value)
 
@@ -619,4 +636,7 @@ while i < len(instructions):
         exit(Interpret.SEMANTIC_ERR)
     except ExitInstruction as e:
         exit(e.ret_code)
+    except TypeError:
+        sys.stderr.write("Nonexisting frame!\n")
+        exit(Interpret.RUNTIME_ERR_NONEXIST_FRAME)
 exit(XMLParser.PARSE_SUCCES)

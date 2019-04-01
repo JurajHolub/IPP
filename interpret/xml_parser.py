@@ -75,7 +75,7 @@ class XMLParser(object):
 
             idx = 1
             while inst.find("arg"+str(idx)) is not None:
-                idx += idx
+                idx += 1
 
             if XMLParser.INSTRUCTIONS[inst.attrib["opcode"].upper()] == idx - 1:
                 return True
