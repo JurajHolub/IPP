@@ -68,7 +68,6 @@ switch ($cmd_args->what_to_do())
         $tests->search_test_files($cmd_args->dir_path, $cmd_args->recursive);
         $html_gen = new HTML5_Generator();
 
-        $html_gen->gen_header();
         foreach ($tests->tests as $test)
         {
             $src = $test . ".src";
@@ -103,17 +102,17 @@ switch ($cmd_args->what_to_do())
                 if ($int_ret_val == 0)
                 {
                     if ($expected_output !== $my_output)
-                        $html_gen->gen_test($test, False);
+                        $html_gen->gen_test($test, False, $int_ret_val, $expected_int_ret_val);
                     else
-                        $html_gen->gen_test($test, True);
+                        $html_gen->gen_test($test, True, $int_ret_val, $expected_int_ret_val);
                 }
                 else
-                    $html_gen->gen_test($test, True);
+                    $html_gen->gen_test($test, True, $int_ret_val, $expected_int_ret_val);
             }
             else
-                $html_gen->gen_test($test, False);
+                $html_gen->gen_test($test, False, $int_ret_val, $expected_int_ret_val);
         }
-        $html_gen->gen_end();
+        $html_gen->gen_tests();
     break;
     case "TEST_PARSE_ONLY":
 
@@ -122,7 +121,6 @@ switch ($cmd_args->what_to_do())
         $tests->search_test_files($cmd_args->dir_path, $cmd_args->recursive);
         $html_gen = new HTML5_Generator();
 
-        $html_gen->gen_header();
         foreach ($tests->tests as $test)
         {
             $src = $test . ".src";
@@ -149,26 +147,26 @@ switch ($cmd_args->what_to_do())
 
             if ($parse_ret_val != $expected_parse_ret_val)
                 if (in_array($parse_ret_val, [21,22,23]) and in_array($expected_parse_ret_val, [21,22,23]))
-                    $html_gen->gen_test($test, True);
+                    $html_gen->gen_test($test, True, $parse_ret_val, $expected_parse_ret_val);
                 else
-                    $html_gen->gen_test($test, False);
+                    $html_gen->gen_test($test, False, $parse_ret_val, $expected_parse_ret_val);
             else
             {
                 if ($parse_ret_val != 0)
-                    $html_gen->gen_test($test, True);
+                    $html_gen->gen_test($test, True, $parse_ret_val, $expected_parse_ret_val);
                 else if ($parse_ret_val == 0 and $jexam_ret_val == 0)
-                    $html_gen->gen_test($test, True);
+                    $html_gen->gen_test($test, True, $parse_ret_val, $expected_parse_ret_val);
                 else
-                    $html_gen->gen_test($test, False);
+                    $html_gen->gen_test($test, False, $parse_ret_val, $expected_parse_ret_val);
             }
 
             //exec("rm ".$my_out);
         }
-        $html_gen->gen_end();
+        $html_gen->gen_tests();
 
     break;
     case "TEST_BOTH":
-        echo "interpret.py not implemented yet.";
+        echo "Test both not implemented yet.";
     break;
 }
 
