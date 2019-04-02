@@ -160,13 +160,68 @@ switch ($cmd_args->what_to_do())
                     $html_gen->gen_test($test, False, $parse_ret_val, $expected_parse_ret_val);
             }
 
-            //exec("rm ".$my_out);
+            exec("rm ".$my_out);
         }
         $html_gen->gen_tests();
 
     break;
     case "TEST_BOTH":
-        echo "Test both not implemented yet.";
+        $tests = new AllTests();
+        $tests->search_test_files($cmd_args->dir_path, $cmd_args->recursive);
+        $html_gen = new HTML5_Generator();
+
+        foreach ($tests->tests as $test)
+        {
+            $src = $test . ".src";
+            $in = $test . ".in";
+            $out = $test . ".out";
+            $my_out = $test . ".my_out";
+            $rc = $test . ".rc";
+
+            if (!file_exists($in))
+                exec("touch ".$in);
+            if (!file_exists($out))
+                exec("touch ".$out);
+
+            $parse = "php7.3 ".$cmd_args->parse_script_file.
+                " <" . $src .">". $my_out;
+            exec($parse, $dump, $parse_ret_val);
+
+            $interpret = "python3.6 ".$cmd_args->int_script_file.
+                " --source=" . $my_out ." --input=". $in . " < " . $in;
+            exec($interpret, $my_output, $int_ret_val);
+            $my_output = implode("\n", $my_output);
+
+            exec("rm ". $my_out);
+
+            $expected_output = file_get_contents($out);
+
+            if (is_readable($rc))
+            {
+                $expected_rc = fopen($rc, "r");
+                fscanf($expected_rc,"%d", $expected_int_ret_val);
+                fclose($expected_rc);
+            }
+            else
+                $expected_int_ret_val = 0;
+
+
+            if ($int_ret_val == $expected_int_ret_val)
+            {
+                if ($int_ret_val == 0)
+                {
+                    if ($expected_output !== $my_output)
+                        $html_gen->gen_test($test, False, $int_ret_val, $expected_int_ret_val);
+                    else
+                        $html_gen->gen_test($test, True, $int_ret_val, $expected_int_ret_val);
+                }
+                else
+                    $html_gen->gen_test($test, True, $int_ret_val, $expected_int_ret_val);
+            }
+            else
+                $html_gen->gen_test($test, False, $int_ret_val, $expected_int_ret_val);
+        }
+        $html_gen->gen_tests();
     break;
 }
 

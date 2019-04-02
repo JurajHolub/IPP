@@ -246,6 +246,10 @@ class Interpret(object):
             if type(symb_value) is str:
                 convertor = string_convertor_fsm.StringConvertorFSM()
                 symb_value = convertor.convert(symb_value)
+            elif type(symb_value) is bool and symb_value is True:
+                symb_value = "true"
+            elif type(symb_value) is bool and symb_value is False:
+                symb_value = "false"
             print(symb_value, end="")
         elif symb_type == "nil":
             pass  # print nothing
@@ -266,8 +270,13 @@ class Interpret(object):
             res = eval("val1 " + op + " val2")
         elif op in [">", "==", "<"] and \
                 (type(val1) is bool and type(val2) is bool or \
-                 type(val1) is int and type(val2) is int or \
-                 type(val1) is str and type(val2) is str):
+                 type(val1) is int and type(val2) is int):
+            res = eval("val1 " + op + " val2")
+        elif op in [">", "==", "<"] and type(val1) is str and type(val2) is str:
+            convertor1 = string_convertor_fsm.StringConvertorFSM()
+            convertor2 = string_convertor_fsm.StringConvertorFSM()
+            val1 = convertor1.convert(val1)
+            val2 = convertor2.convert(val2)
             res = eval("val1 " + op + " val2")
         elif op == "CONCAT" and type(val1) is str and type(val2) is str:
             res = val1 + val2
@@ -577,7 +586,10 @@ elif cmd_args.what_to_do() == argument_parser.ArgumentParser.HELP:
     sys.exit(0)
 
 parser = xml_parser.XMLParser(cmd_args)
-result = parser.parse()
+try:
+    result = parser.parse()
+except:
+    exit(XMLParser.NOT_WELL_FORMED_XML)
 
 if result != XMLParser.PARSE_SUCCES:
     exit(result)
@@ -639,4 +651,7 @@ while i < len(instructions):
     except TypeError:
         sys.stderr.write("Nonexisting frame!\n")
         exit(Interpret.RUNTIME_ERR_NONEXIST_FRAME)
+    except ZeroDivisionError:
+        sys.stderr.write("Zero division error!\n")
+        exit(Interpret.RUNTIME_ERR_WRONG_OPERAND_VALUE)
 exit(XMLParser.PARSE_SUCCES)

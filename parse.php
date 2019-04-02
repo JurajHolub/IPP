@@ -49,7 +49,6 @@ while ($token->id !== "T_EOF")
 {
     //fwrite(STDERR, "STATE: " . $state . " \"" . $token->id . "\" \"" . $token->val . "\"\n");
 
-    //TODO FSM
     switch ($state)
     {
         case "S_BEGIN":
@@ -338,7 +337,6 @@ while ($token->id !== "T_EOF")
         default:
             $state = "S_ERROR"; // syntax or lexical error
     }
-    //TODO FSM
 
     $token = $token_analyzer->get_token();
 }
