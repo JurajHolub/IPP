@@ -67,7 +67,8 @@ class Interpret(object):
 
     CONST_SYMBOLS = ["int", "bool", "string"]
 
-    def __init__(self):
+    def __init__(self, input):
+        self.input = input
         self.global_frame = dict()
         self.temporary_frame = None
         self.local_frame_stack = Stack(RuntimeErrorNonExistFrame)
@@ -553,7 +554,11 @@ class Interpret(object):
         if var_type != "var":
             raise RuntimeErrorWrongOperandsType(self.get_line())
 
-        input_value = input()
+        if self.input is None:
+            input_value = input()
+        else:
+            with open(self.input) as input_file:
+                input_value = input_file.readline()
 
         if symb_type == "type" and symb_value == "int":
             try:
@@ -596,7 +601,7 @@ if result != XMLParser.PARSE_SUCCES:
 
 instructions = parser.get_instructions()
 instructions.sort(key=lambda tup: tup[1])
-interpret = Interpret()
+interpret = Interpret(cmd_args.get_input)
 
 idx = 1
 for inst, order in instructions:
