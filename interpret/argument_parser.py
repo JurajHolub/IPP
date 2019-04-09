@@ -9,6 +9,7 @@
 """
 
 import os
+import sys
 
 HELP_MESSAGE ="""Script load XML representation of input program and interprete it.
 Usage: python3.6 interpret.py [Optionals]
@@ -65,6 +66,24 @@ class ArgumentParser(object):
 
         if self.source == None and self.input == None:
             self.error = True
+
+        if self.source == None:
+            self.source = ""
+            for line in sys.stdin:
+                self.source += line
+        else:
+            with open(self.source) as f:
+                self.source = f.read()
+
+        if self.input == None:
+            self.input = []
+            for line in sys.stdin:
+                self.input.insert(0, line)
+        else:
+            with open(self.input) as f:
+                self.input = []
+                for line in f:
+                    self.input.insert(0, line)
 
     def what_to_do(self):
         if self.error:

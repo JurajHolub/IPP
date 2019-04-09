@@ -554,11 +554,7 @@ class Interpret(object):
         if var_type != "var":
             raise RuntimeErrorWrongOperandsType(self.get_line())
 
-        if self.input is None:
-            input_value = input()
-        else:
-            with open(self.input) as input_file:
-                input_value = input_file.readline()
+        input_value = self.input.pop()
 
         if symb_type == "type" and symb_value == "int":
             try:
@@ -622,34 +618,34 @@ while i < len(instructions):
         sys.stderr.write(str(idx-1)+": Instruction \""+ inst.attrib["opcode"]+"\" not exist!\n")
         exit(XMLParser.UNSUPPORTED_XML_ELEMENT)
     except XMLOperandError as e:
-        sys.stderr.write(e.line+": "+e.inst + " "+e.arg+" has wrong argument \"" + e.wrong_operand + "\" (\""+e.expected_operand+"\" expected).")
+        sys.stderr.write(e.line+": "+e.inst + " "+e.arg+" has wrong argument \"" + e.wrong_operand + "\" (\""+e.expected_operand+"\" expected).\n")
         exit(XMLParser.UNSUPPORTED_XML_ELEMENT)
     except SyntaxError as e:
-        sys.stderr.write(interpret.get_line()+": \""+inst.attrib["opcode"] + "\" not supported instruction.")
+        sys.stderr.write(interpret.get_line()+": \""+inst.attrib["opcode"] + "\" not supported instruction.\n")
         print(interpret.get_argument(inst, 1))
         print(interpret.get_argument(inst, 2))
         print(interpret.get_argument(inst, 3))
         exit(XMLParser.UNSUPPORTED_XML_ELEMENT)
     except RuntimeErrorUndefVar as e:
-        sys.stderr.write(e.line+": "+"Undefined variable \""+ e.variable +"\" in frame \""+ e.frame +"\"")
+        sys.stderr.write(e.line+": "+"Undefined variable \""+ e.variable +"\" in frame \""+ e.frame +"\"\n")
         exit(Interpret.RUNTIME_ERR_UNDEF_VAR)
     except RuntimeErrorWrongOperandValue as e:
-        sys.stderr.write(interpret.get_line()+": Wrong operand type for operator \""+e.operator+"\": op1=\""+ e.op1 +"\", op2=\""+ e.op2 +"\"")
+        sys.stderr.write(interpret.get_line()+": Wrong operand type for operator \""+e.operator+"\": op1=\""+ e.op1 +"\", op2=\""+ e.op2 +"\"\n")
         exit(Interpret.RUNTIME_ERR_UNDEF_VAR)
     except RuntimeErrorNonExistFrame as e:
-        sys.stderr.write(e.line+": Nonexisting frame!")
+        sys.stderr.write(e.line+": Nonexisting frame!\n")
         exit(Interpret.RUNTIME_ERR_NONEXIST_FRAME)
     except RuntimeErrorMissingValue as e:
-        sys.stderr.write(e.line+": Missing value!")
+        sys.stderr.write(e.line+": Missing value!\n")
         exit(Interpret.RUNTIME_ERR_MISSING_VALUE)
     except RuntimeErrorString as e:
-        sys.stderr.write(e.line+": String error!")
+        sys.stderr.write(e.line+": String error!\n")
         exit(Interpret.RUNTIME_ERR_STRING)
     except RuntimeErrorWrongOperandsType as e:
-        sys.stderr.write(e.line+": Wrong operands type!")
+        sys.stderr.write(e.line+": Wrong operands type!\n")
         exit(Interpret.RUNTIME_ERR_WRONG_OPERANDS_TYPE)
     except SemanticError as e:
-        sys.stderr.write(e.line+": Semantic error!")
+        sys.stderr.write(e.line+": Semantic error!\n")
         exit(Interpret.SEMANTIC_ERR)
     except ExitInstruction as e:
         exit(e.ret_code)

@@ -61,7 +61,7 @@ class XMLParser(object):
         self.instructions = []
 
     def error_xml_header(self):
-        dom = xml.dom.minidom.parse(self.cmd_args.source)
+        dom = xml.dom.minidom.parseString(self.cmd_args.source)
         if dom.encoding.upper() != "UTF-8" and dom.version != "1.0":
             return True
         else:
@@ -71,7 +71,7 @@ class XMLParser(object):
         return self.instructions
 
     def valid_instruction(self, inst):
-        if inst.attrib["opcode"] in XMLParser.INSTRUCTIONS:
+        if inst.attrib["opcode"].upper() in XMLParser.INSTRUCTIONS:
 
             idx = 1
             while inst.find("arg"+str(idx)) is not None:
@@ -87,8 +87,7 @@ class XMLParser(object):
         if self.error_xml_header():
             return XMLParser.NOT_WELL_FORMED_XML
         try:
-            tree = xml.etree.ElementTree.parse(self.cmd_args.source)
-            root = tree.getroot()
+            root = xml.etree.ElementTree.fromstring(self.cmd_args.source)
         except:
             return XMLParser.NOT_WELL_FORMED_XML
 

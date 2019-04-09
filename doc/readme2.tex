@@ -23,6 +23,8 @@
 % proposal of solution
 \section{Proposal of solution} \label{proposal}
 
+Solution of interpret program start with parsing source IPPcode19 in XML representation to program inner representation. In this phase program done all necessary syntactic analysys. In next step program interpret parsed IPPcode19 like instructions in right order. In time of interpretation, program done all runtime semantic analyses. Interpret stream output of interpretation to standard output. In case of any syntactic or semantic error, program exit interpretation with specific error return value and generate brief error message to standard error file.
+Figure \ref{obr1} shows scheme of implemented interpret program.
 
 \begin{figure}[H] 
 	\centering
@@ -31,17 +33,13 @@
 	\label{obr1}
 \end{figure} 
 
-Figure \ref{obr1} shows scheme of implemented algorithm of parsing IPPcode19 and generating XML output.
-
 \section{Implementation details}
-Suggested solution parted to three blocks described in section \ref{proposal} is implemented in three logical units:
+Implementation of solution proposed in section \ref{proposal} is parted to logical blocks described in this section.
 \begin{itemize}
-	\item \textbf{XML parser}: parse input file to xml, using ElementTree, syntax check
-	\item \textbf{Interpret}: 
-	\item \textbf{Error handling}: 
-	\item \textbf{String convertor}:  
+	\item \textbf{XML parser}: parse input file to xml, using ElementTree, syntax check, ordering of instruction
+	\item \textbf{Interpret}: one method for one instruction, ippcode data are converted to python data representation with equivalent data type (type analyzes could be handled by python it self), in case of runtime error raise exception (described in error handling), program data handling, jumps in program, 
+	\item \textbf{Error handling}: syntactic??, semantic handled by catching exception raised in interpret. every runtime error represent one error class, data flushed to stderr about error
+	\item \textbf{String convertor}: convert string constant to IPPcode19 string, implemented like FSM
 \end{itemize}
-
-
 
 \end{document}
