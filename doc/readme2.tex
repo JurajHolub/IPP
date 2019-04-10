@@ -23,11 +23,11 @@
 % proposal of solution
 \section{Proposal of solution} \label{proposal}
 
-    This section introduces the proposed implementation. Figure \ref{obr1} shows the scheme of the implemented interpret. The program starts with parsing source IPPcode19 program in XML representation to program inner representation. In this phase program done all necessary syntactic analyses. In the next step, application execute a parsed sequence of IPPcode19 instructions. Interpret done all semantic analyses in runtime. An output of the program is produced to a standard output stream. In case of any syntactic or semantic error, interpret stop execute source code and return a specific error value. Interpret also generate a brief error message to the standard error stream.
+    This section introduces the proposed implementation. Figure \ref{obr1} shows the scheme of the implemented interpret. The program starts with parsing source IPPcode19 program in XML representation to program inner representation. In this phase program done all necessary syntactic analyses. In the next step, application execute a parsed sequence of IPPcode19 instructions. In case of any syntactic or semantic error, interpret stop execute source code and return a specific error value. Interpret also generate a brief error message to the standard error stream.
 
 \begin{figure}[H] 
 	\centering
-	\includegraphics[width=.4 \paperwidth]{interpret.pdf}
+	\includegraphics[width=.5 \paperwidth]{interpret.pdf}
 	\caption{Scheme of IPPcode19 program interpretation.}
 	\label{obr1}
 \end{figure} 
